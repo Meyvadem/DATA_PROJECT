@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package mmm;
 
 import java.awt.Color;
@@ -24,16 +20,14 @@ public class BingoCard extends javax.swing.JFrame {
     JTextField[][] panel2Rows = new JTextField[3][9];
     JTextField[][] panel4Rows = new JTextField[3][9];
     MultiLinkedList m2 = new MultiLinkedList();
-        MultiLinkedList m4 = new MultiLinkedList();
-
-            
+    MultiLinkedList m4 = new MultiLinkedList();
 
     public BingoCard() {
         initComponents();
-        
+
         m2.createMultilinkedList();
         m4.createMultilinkedList();
-        
+
         JTextField[][] panel2Rows = {
             {jTextField1, jTextField2, jTextField5, jTextField3, jTextField4, jTextField6, jTextField19, jTextField22, jTextField25},
             {jTextField7, jTextField8, jTextField11, jTextField12, jTextField13, jTextField14, jTextField20, jTextField23, jTextField26},
@@ -51,7 +45,7 @@ public class BingoCard extends javax.swing.JFrame {
         colorRandomFields(panel2Rows);
         fillAllNumbers(panel2Rows);
         fillAllNumbers(panel4Rows);
-        
+
         m2.printMultilinkedList();
         m4.printMultilinkedList();
 
@@ -573,11 +567,6 @@ public class BingoCard extends javax.swing.JFrame {
         jTextField39.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jTextField39.setForeground(new java.awt.Color(255, 204, 0));
         jTextField39.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField39.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField39ActionPerformed(evt);
-            }
-        });
 
         jTextField40.setBackground(new java.awt.Color(153, 0, 51));
         jTextField40.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -1070,10 +1059,6 @@ public class BingoCard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField38ActionPerformed
 
-    private void jTextField39ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField39ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField39ActionPerformed
-
     private void jTextField40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField40ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField40ActionPerformed
@@ -1144,24 +1129,23 @@ public class BingoCard extends javax.swing.JFrame {
 
     // Rastgele 4 text filedı seçip mavi renge boyayan metod
     private void colorRandomFields(JTextField[][] fields) {
-    Random random = new Random();
+        Random random = new Random();
 
-    for (JTextField[] row : fields) {
-        Set<Integer> selectedIndexes = new HashSet<>();
+        for (JTextField[] row : fields) {
+            Set<Integer> selectedIndexes = new HashSet<>();
 
-        // Rastgele 4 index seçelim
-        while (selectedIndexes.size() < 4) {
-            int index = random.nextInt(row.length);
-            selectedIndexes.add(index);
-        }
+            // Rastgele 4 index seçelim
+            while (selectedIndexes.size() < 4) {
+                int index = random.nextInt(row.length);
+                selectedIndexes.add(index);
+            }
 
-        // Seçilen indexlere sahip olan text filedları mavi renge boyayalım
-        for (int index : selectedIndexes) {
-            row[index].setBackground(Color.ORANGE);
+            // Seçilen indexlere sahip olan text filedları mavi renge boyayalım
+            for (int index : selectedIndexes) {
+                row[index].setBackground(Color.ORANGE);
+            }
         }
     }
-}
-
 
     private int generateUniqueRandomNumber(Set<Integer> usedNumbers) {
         int randomNumber;
@@ -1202,26 +1186,21 @@ public class BingoCard extends javax.swing.JFrame {
         int origin = 1;
         int bound = 9;
         int index = 1;
-        int numbbb = 1;
+        
         for (int i = 0; i < 9; i++) {
-            index=numbbb++;
-            for (int j = 0; j < 3; j++) {
-                 if(fields[j][i].getBackground()!=Color.orange){
-                if (i == number) {
 
-                    numb = generateUniqueRandomNumber(usedNumbers, origin, bound);
-                    fields[j][i].setText(numb + "");
-                    //m2.getNodeFromIndex(index).data=numb;
-                    System.out.println(index);
-                    
-                    index+=5;
+            for (int j = 0; j < 3; j++) {
+                if (fields[j][i].getBackground() != Color.orange) {
+                    if (i == number) {
+
+                        numb = generateUniqueRandomNumber(usedNumbers, origin, bound);
+                        fields[j][i].setText(numb + "");
+                        m2.getNodeFromIndex((j * 5) + (i % 5)).data = numb;
+
+                    }
                 }
-                 }else{
-                     index+=5;
-                             
-                 }
-                 
             }
+
             number++;
             origin += 10;
             bound += 10;
